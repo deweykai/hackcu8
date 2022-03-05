@@ -1,18 +1,14 @@
 import React, { useContext } from "react";
-import { PlayerContext } from "./StockGame";
+import { GameContext } from "./StockGame";
 
-export function Timeline({ stockData }) {
-    let { player, setPlayer } = useContext(PlayerContext);
-    const click = () => {
-        setPlayer("josh");
-        console.log("click");
-    };
+export function Timeline() {
+    let { game, setGame } = useContext(GameContext);
+
+    let stockdata = game.stockdata;
     //return <h1>{parseCsv(data)}</h1>;
     return (
         <>
-            {player}
-            <h1 onClick={click}>Timeline</h1>
-            <p>{stockData.length}</p>
+            <h1>Timeline</h1>
         </>
     );
 }

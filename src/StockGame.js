@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 
 import rawData from "./data";
 import { parseCsv } from "./csvParser";
+import { Game } from "./gamestate";
 
 const GameContext = React.createContext({
     game: new Game(),
@@ -14,19 +15,14 @@ const GameContext = React.createContext({
 export { GameContext };
 
 export function StockGame() {
-    let [stockData, setStockData] = useState([]);
-    let [game, setGame] = useState(new Game());
+    let [game, setGame] = useState(new Game(parseCsv(rawData), 100));
     let value = { game, setGame };
-
-    useEffect(() => {
-        setStockData(parseCsv(rawData));
-    }, []);
 
     return (
         <GameContext.Provider value={value}>
             <Grid container>
                 <Grid item xs={8}>
-                    <Timeline stockData={stockData} />
+                    <Timeline />
                 </Grid>
                 <Grid item xs={4}>
                     <ControlPanel />
