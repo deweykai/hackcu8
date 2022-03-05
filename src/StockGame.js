@@ -1,5 +1,12 @@
 import React from "react";
+import { ControlPanel } from "./ControlPanel";
+import { Timeline } from "./Timeline";
 
 export function StockGame() {
-    return <h1>Stock game</h1>;
+    return (
+        <>
+            <Timeline />
+            <ControlPanel />
+        </>
+    );
 }
