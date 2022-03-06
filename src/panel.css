@@ -1,0 +1,17 @@
+#accountDisplay {
+    display:inline;
+}
+
+#BuyButton{
+    background-color: green;
+    min-width: 75px;
+}
+
+#SellButton{
+    background-color: red;
+    min-width: 75px;
+}
+#nextMove{
+    position:absolute;
+    bottom: 50px;
+}
