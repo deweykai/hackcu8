@@ -12,6 +12,6 @@
     min-width: 75px;
 }
 #nextMove{
-    position:absolute;
-    bottom: 50px;
+    position: relative;
+    bottom: -1000 px;
 }
