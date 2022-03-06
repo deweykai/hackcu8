@@ -18,7 +18,9 @@ export { GameContext };
 
 export function StockGame() {
     let [game, setGame] = useState(new Game(parseCsv(rawData), 100));
-    let value = { game, setGame };
+    let clone = Object.assign(Object.create(Object.getPrototypeOf(game)), game);
+    console.log(clone);
+    let value = { game: clone, setGame };
 
     return (
         <GameContext.Provider value={value}>
