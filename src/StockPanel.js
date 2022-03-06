@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import "./panel.css";
 
 import { GameContext } from "./StockGame";
+import StockArray from "./StockArray";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export function StockPanel() {
@@ -43,6 +44,8 @@ export function StockPanel() {
 
     const nextDay = () =>{
         game.next_time_step();
+        StockArray.data.push({date: game.time, y: stockprice})
+        console.log(StockArray.data)
         setGame(game);
         setShareAmt(0)
         setBuyAmt(0);
