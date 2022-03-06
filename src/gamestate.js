@@ -50,4 +50,19 @@ export class Game {
             }
         }
     }
+
+    get_stock_price() {
+      percent_change = 0
+      if (this.time > 0) {
+        last_price = this.stockdata[this.time-1]
+        curr_price = this.stockdata[this.time]
+        percent_change = (curr_price - last_price)/last_price
+
+        return [this.stockdata[this.time], percent_change]
+      }
+
+      else {
+        return [this.stockdata[this.time], percent_change]
+      }
+    }
 }
