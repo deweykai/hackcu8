@@ -65,6 +65,13 @@ export class Game {
         }
     }
 
+    total_wealth() {
+        let wealth = this.player.wallet;
+        let [price] = this.get_stock_price();
+        wealth += this.player.shares * price;
+        return wealth;
+    }
+
     get_stock_price() {
         let percent_change = 0;
         if (this.time > 0) {
