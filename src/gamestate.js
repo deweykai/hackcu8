@@ -14,6 +14,10 @@ export class Game {
         this.stockdata = stock;
     }
 
+    get_stock_data() {
+        return this.stockdata.slice(0, this.time);
+    }
+
     buy(cash) {
         if (this.player.wallet >= cash) {
             this.player.wallet -= cash;
