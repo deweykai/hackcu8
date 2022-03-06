@@ -15,7 +15,6 @@ export function StockPanel() {
     let [stockprice, percent_change] = game.get_stock_price();
     let share = game.player.shares;
     let balance = game.player.wallet;
-    let total_val = balance + share * stockprice;
     let [buyAmt, setBuyAmt] = useState(0);
     let [shareAmt, setShareAmt] = useState(0);
 
@@ -23,6 +22,13 @@ export function StockPanel() {
         setBuyAmt(0);
         setShareAmt(0);
     }, [game]);
+
+    useEffect(() => {
+        if (!Number.isFinite(buyAmt)) {
+            setBuyAmt(0);
+            setShareAmt(0);
+        }
+    }, [buyAmt]);
 
     const onBuy = () => {
         game.buy(buyAmt);
@@ -47,7 +53,6 @@ export function StockPanel() {
     const nextDay = () => {
         game.next_time_step();
         setGame(game);
-        total_val = balance + share * stockprice;
     };
 
     return (
@@ -58,7 +63,7 @@ export function StockPanel() {
             <Stack id="accountdisplay" spacing={2}>
                 <div> Balance: {balance}</div>
                 <div> Shares: {share}</div>
-                <div> Total Wealth: {total_val} </div>
+                <div> Total Wealth: {game.total_wealth()} </div>
             </Stack>
             <h4> Stocks: </h4>
 
