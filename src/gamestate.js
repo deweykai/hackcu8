@@ -15,7 +15,7 @@ export class Game {
     }
 
     get_stock_data() {
-        return this.stockdata.slice(0, this.time);
+        return this.stockdata.slice(0, this.time + 1);
     }
 
     buy(cash) {
@@ -45,24 +45,22 @@ export class Game {
         }
     }
 
-    next_time_step() {
-        if (!this.is_finished()) {
-            this.time += 1;
+    next_time_step(n = 1) {
+        n = Number(n);
+        if (!this.is_finished() && Number.isFinite(n) && n >= 1) {
+            if (this.time + n >= this.stockdata.length) {
+                this.time = this.stockdata.length - 1;
+            } else {
+                this.time += n;
+            }
         }
     }
 
     is_finished() {
-        if (this.time === this.gameLength - 1) {
-            console.log("The next turn is the last turn!");
+        if (this.time === this.stockdata.length - 1) {
+            return true;
         }
-        if (this.time === this.gameLength) {
-            console.log("Game over!");
-            if (this.player.wallet < 1000) {
-                console.log("You lost ", 1000 - this.player.wallet, " dollars!");
-            } else {
-                console.log("You gained ", this.player.wallet - 1000, " dollars!");
-            }
-        }
+        return false;
     }
 
     total_wealth() {

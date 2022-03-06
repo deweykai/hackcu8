@@ -12,6 +12,7 @@ export function StockPanel() {
     let [stockprice, percent_change] = game.get_stock_price();
     let share = game.player.shares;
     let balance = game.player.wallet;
+    let [timeStep, setTimeStep] = useState(1);
     let [buyAmt, setBuyAmt] = useState(0);
     let [shareAmt, setShareAmt] = useState(0);
 
@@ -48,8 +49,12 @@ export function StockPanel() {
     };
 
     const nextDay = () => {
-        game.next_time_step();
+        game.next_time_step(timeStep);
         setGame(game);
+    };
+
+    const handleStepChange = (event) => {
+        setTimeStep(event.target.value);
     };
 
     return (
@@ -81,10 +86,13 @@ export function StockPanel() {
                     </Button>
                     <TextField id="sellinput" value={-shareAmt} onChange={onSellEnter}></TextField>
                 </Stack>
+                <Stack direction="row" spacing={2}>
+                    <TextField value={timeStep} onChange={handleStepChange}></TextField>
+                    <Button onClick={nextDay} variant="contained">
+                        Next Day
+                    </Button>
+                </Stack>
             </Stack>
-            <Button id="nextMove" onClick={nextDay}>
-                End Move
-            </Button>
         </>
     );
 }
