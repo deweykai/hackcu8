@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import "./panel.css";
 
 import { GameContext } from "./StockGame";
+import StockArray from "./StockArray";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export function StockPanel() {
@@ -19,13 +20,16 @@ export function StockPanel() {
     const onBuy = () => {
         game.buy(buyAmt)
 
-        setGame(game)
+        setGame(game);
+        setBuyAmt(0)
+        setShareAmt(0);
     };
 
     const onSell = () => {
         game.sell(shareAmt)
 
-        setGame(game)
+        setGame(game);
+        setBuyAmt(0)
     };
 
     const onBuyEnter = (event) => {
@@ -40,7 +44,11 @@ export function StockPanel() {
 
     const nextDay = () =>{
         game.next_time_step();
+        StockArray.data.push({date: game.time, y: stockprice})
+        console.log(StockArray.data)
         setGame(game);
+        setShareAmt(0)
+        setBuyAmt(0);
     }
 
     return (
@@ -62,13 +70,13 @@ export function StockPanel() {
                     <Button id="BuyButton" variant="contained" onClick={onBuy}>
                         Buy
                     </Button>
-                    <TextField id="buyinput" onChange = {onBuyEnter}></TextField>
+                    <TextField id="buyinput" value = {shareAmt} onChange = {onBuyEnter}></TextField>
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Button id="SellButton" variant="contained" onClick={onSell}>
                         Sell
                     </Button>
-                    <TextField id="sellinput" onChange = {onSellEnter}></TextField>
+                    <TextField id="sellinput" value = {-shareAmt} onChange = {onSellEnter}></TextField>
                 </Stack>
             </Stack>
             <Button id="nextMove" onClick={nextDay}>End Move</Button>
