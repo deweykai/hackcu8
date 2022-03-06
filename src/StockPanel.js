@@ -15,6 +15,7 @@ export function StockPanel() {
     let [stockprice, percent_change] = game.get_stock_price();
     let share = game.player.shares;
     let balance = game.player.wallet;
+    let total_val = balance + share * stockprice;
     let [buyAmt, setBuyAmt] = useState(0);
     let [shareAmt, setShareAmt] = useState(0);
     const onBuy = () => {
@@ -48,6 +49,7 @@ export function StockPanel() {
         console.log(StockArray.data)
         setGame(game);
         setShareAmt(0)
+        total_val = balance + share * stockprice;
         setBuyAmt(0);
     }
 
@@ -59,6 +61,7 @@ export function StockPanel() {
             <Stack id="accountdisplay" spacing={2}>
                 <div> Balance: {balance}</div>
                 <div> Shares: {share}</div>
+                <div> Total Wealth: {total_val} </div>
             </Stack>
             <h4> Stocks: </h4>
 
