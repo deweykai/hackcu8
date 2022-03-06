@@ -19,14 +19,15 @@ export class Game {
     }
 
     buy(cash) {
-        if (this.player.wallet >= cash) {
-            this.player.wallet -= cash;
-            this.player.shares += cash / this.stockdata[this.time].closing;
-            return true;
-        } else {
-            console.log("Not enough money to buy stock!");
-            return false;
-        }
+        if (Number.isFinite())
+            if (this.player.wallet >= cash) {
+                this.player.wallet -= cash;
+                this.player.shares += cash / this.stockdata[this.time].closing;
+                return true;
+            } else {
+                console.log("Not enough money to buy stock!");
+                return false;
+            }
     }
 
     sell(share) {
