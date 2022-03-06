@@ -13,6 +13,7 @@ export function StockPanel() {
     let share = game.player.shares;
     let balance = game.player.wallet;
     let [buyAmt, setBuyAmt] = useState(0);
+    let [sellAmt, setSellAmt] = useState(0);
     let [shareAmt, setShareAmt] = useState(0);
 
     useEffect(() => {
@@ -33,7 +34,8 @@ export function StockPanel() {
     };
 
     const onSell = () => {
-        game.sell(shareAmt);
+        console.log(shareAmt);
+        game.sell(1);
         setGame(game);
     };
 
@@ -44,7 +46,7 @@ export function StockPanel() {
 
     const onSellEnter = (event) => {
         setBuyAmt(-event.target.value * stockprice);
-        setShareAmt(event.target.value);
+        setShareAmt(-event.target.value);
     };
 
     const nextDay = () => {
@@ -69,17 +71,14 @@ export function StockPanel() {
                 <div> Current Price: {stockprice}</div>
                 <div> Cost: {buyAmt} </div>
                 <div> Pct Change: {percent_change}</div>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={5}>
                     <Button id="BuyButton" variant="contained" onClick={onBuy}>
                         Buy
                     </Button>
                     <TextField id="buyinput" value={shareAmt} onChange={onBuyEnter}></TextField>
-                </Stack>
-                <Stack direction="row" spacing={2}>
                     <Button id="SellButton" variant="contained" onClick={onSell}>
                         Sell
                     </Button>
-                    <TextField id="sellinput" value={-shareAmt} onChange={onSellEnter}></TextField>
                 </Stack>
             </Stack>
             <Button id="nextMove" onClick={nextDay}>
