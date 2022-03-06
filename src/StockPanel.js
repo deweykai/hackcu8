@@ -13,6 +13,7 @@ import { isDisabled } from "@testing-library/user-event/dist/utils";
 export function StockPanel() {
     const { game, setGame } = useContext(GameContext);
     let [stockprice, percent_change] = game.get_stock_price();
+    console.log(stockprice)
     let share = game.player.shares;
     let balance = game.player.wallet;
     let total_val = balance + share * stockprice;
