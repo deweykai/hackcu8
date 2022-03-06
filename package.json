@@ -1,7 +1,7 @@
 {
   "name": "hackcu8",
   "version": "0.1.0",
-  "homepage": "https://github.io/deweykai/hackcu8",
+  "homepage": "https://deweykai.github.io/hackcu8",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.1",
