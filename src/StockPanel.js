@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -13,46 +13,42 @@ import { isDisabled } from "@testing-library/user-event/dist/utils";
 export function StockPanel() {
     const { game, setGame } = useContext(GameContext);
     let [stockprice, percent_change] = game.get_stock_price();
-    console.log(stockprice)
     let share = game.player.shares;
     let balance = game.player.wallet;
     let total_val = balance + share * stockprice;
     let [buyAmt, setBuyAmt] = useState(0);
     let [shareAmt, setShareAmt] = useState(0);
-    const onBuy = () => {
-        game.buy(buyAmt)
 
-        setGame(game);
-        setBuyAmt(0)
+    useEffect(() => {
+        setBuyAmt(0);
         setShareAmt(0);
+    }, [game]);
+
+    const onBuy = () => {
+        game.buy(buyAmt);
+        setGame(game);
     };
 
     const onSell = () => {
-        game.sell(shareAmt)
-
+        game.sell(shareAmt);
         setGame(game);
-        setBuyAmt(0)
     };
 
     const onBuyEnter = (event) => {
         setBuyAmt(event.target.value * stockprice);
-        setShareAmt(event.target.value)
-    }
+        setShareAmt(event.target.value);
+    };
 
     const onSellEnter = (event) => {
         setBuyAmt(-event.target.value * stockprice);
-        setShareAmt(event.target.value)
-    }
+        setShareAmt(event.target.value);
+    };
 
-    const nextDay = () =>{
+    const nextDay = () => {
         game.next_time_step();
-        StockArray.data.push({date: game.time, y: stockprice})
-        console.log(StockArray.data)
         setGame(game);
-        setShareAmt(0)
         total_val = balance + share * stockprice;
-        setBuyAmt(0);
-    }
+    };
 
     return (
         <>
@@ -74,16 +70,18 @@ export function StockPanel() {
                     <Button id="BuyButton" variant="contained" onClick={onBuy}>
                         Buy
                     </Button>
-                    <TextField id="buyinput" value = {shareAmt} onChange = {onBuyEnter}></TextField>
+                    <TextField id="buyinput" value={shareAmt} onChange={onBuyEnter}></TextField>
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Button id="SellButton" variant="contained" onClick={onSell}>
                         Sell
                     </Button>
-                    <TextField id="sellinput" value = {-shareAmt} onChange = {onSellEnter}></TextField>
+                    <TextField id="sellinput" value={-shareAmt} onChange={onSellEnter}></TextField>
                 </Stack>
             </Stack>
-            <Button id="nextMove" onClick={nextDay}>End Move</Button>
+            <Button id="nextMove" onClick={nextDay}>
+                End Move
+            </Button>
         </>
     );
 }
