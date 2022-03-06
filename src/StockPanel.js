@@ -29,7 +29,7 @@ export function StockPanel() {
             </Stack>
             <h4> Stocks: </h4>
 
-            <Stack container spacing={2}>
+            <Stack spacing={2}>
                 <div> Shares: {game.player.shares}</div>
                 <div> Current Price: {stockprice}</div>
                 <div> Cost </div>
