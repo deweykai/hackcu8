@@ -15,7 +15,7 @@ export class Game {
     }
 
     get_stock_data() {
-        return this.stockdata.slice(0, this.time + 1);
+        return this.stockdata.slice(0, this.time);
     }
 
     buy(cash) {
