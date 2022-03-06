@@ -52,10 +52,10 @@ export class Game {
     }
 
     is_finished() {
-        if (this.time == this.gameLength - 1) {
+        if (this.time === this.gameLength - 1) {
             console.log("The next turn is the last turn!");
         }
-        if (this.time == this.gameLength) {
+        if (this.time === this.gameLength) {
             console.log("Game over!");
             if (this.player.wallet < 1000) {
                 console.log("You lost ", 1000 - this.player.wallet, " dollars!");

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ControlPanel } from "./ControlPanel";
 import { Timeline } from "./Timeline";
 import Grid from "@mui/material/Grid";
