@@ -22,8 +22,10 @@ export class Game {
         if (this.player.wallet >= cash) {
             this.player.wallet -= cash;
             this.player.shares += cash / this.stockdata[this.time];
+            return true;
         } else {
             console.log("Not enough money to buy stock!");
+            return false;
         }
     }
 
@@ -31,14 +33,18 @@ export class Game {
         if (this.player.shares >= share) {
             this.player.shares -= share;
             this.player.wallet += share * this.stockdata[this.time];
+            return true;
         } else {
             console.log("You cannot sell ", share, " shares!");
             console.log("You only have ", this.player.shares, " shares...");
+            return false;
         }
     }
 
     next_time_step() {
-        this.time += 1;
+        if (!this.is_finished()) {
+            this.time += 1;
+        }
     }
 
     is_finished() {
