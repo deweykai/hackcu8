@@ -1,14 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import "./panel.css";
 
 import { GameContext } from "./StockGame";
-import StockArray from "./StockArray";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export function StockPanel() {
     const { game, setGame } = useContext(GameContext);
@@ -71,6 +68,7 @@ export function StockPanel() {
                 <div> Shares: {game.player.shares}</div>
                 <div> Current Price: {stockprice}</div>
                 <div> Cost: {buyAmt} </div>
+                <div> Pct Change: {percent_change}</div>
                 <Stack direction="row" spacing={2}>
                     <Button id="BuyButton" variant="contained" onClick={onBuy}>
                         Buy
