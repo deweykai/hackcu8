@@ -21,7 +21,7 @@ export class Game {
     buy(cash) {
         if (this.player.wallet >= cash) {
             this.player.wallet -= cash;
-            this.player.shares += cash / this.stockdata[this.time];
+            this.player.shares += cash / this.stockdata[this.time].closing;
             return true;
         } else {
             console.log("Not enough money to buy stock!");
@@ -32,7 +32,7 @@ export class Game {
     sell(share) {
         if (this.player.shares >= share) {
             this.player.shares -= share;
-            this.player.wallet += share * this.stockdata[this.time];
+            this.player.wallet += share * this.stockdata[this.time].closing;
             return true;
         } else {
             console.log("You cannot sell ", share, " shares!");
@@ -64,13 +64,13 @@ export class Game {
     get_stock_price() {
         let percent_change = 0;
         if (this.time > 0) {
-            let last_price = this.stockdata[this.time - 1];
-            let curr_price = this.stockdata[this.time];
+            let last_price = this.stockdata[this.time - 1].closing;
+            let curr_price = this.stockdata[this.time].closing;
             percent_change = (curr_price - last_price) / last_price;
 
-            return [this.stockdata[this.time], percent_change];
+            return [this.stockdata[this.time].closing, percent_change];
         } else {
-            return [this.stockdata[this.time], percent_change];
+            return [this.stockdata[this.time].closing, percent_change];
         }
     }
 }
