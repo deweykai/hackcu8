@@ -19,13 +19,16 @@ export function StockPanel() {
     const onBuy = () => {
         game.buy(buyAmt)
 
-        setGame(game)
+        setGame(game);
+        setBuyAmt(0)
+        setShareAmt(0);
     };
 
     const onSell = () => {
         game.sell(shareAmt)
 
-        setGame(game)
+        setGame(game);
+        setBuyAmt(0)
     };
 
     const onBuyEnter = (event) => {
@@ -41,6 +44,8 @@ export function StockPanel() {
     const nextDay = () =>{
         game.next_time_step();
         setGame(game);
+        setShareAmt(0)
+        setBuyAmt(0);
     }
 
     return (
@@ -62,13 +67,13 @@ export function StockPanel() {
                     <Button id="BuyButton" variant="contained" onClick={onBuy}>
                         Buy
                     </Button>
-                    <TextField id="buyinput" onChange = {onBuyEnter}></TextField>
+                    <TextField id="buyinput" value = {shareAmt} onChange = {onBuyEnter}></TextField>
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Button id="SellButton" variant="contained" onClick={onSell}>
                         Sell
                     </Button>
-                    <TextField id="sellinput" onChange = {onSellEnter}></TextField>
+                    <TextField id="sellinput" value = {-shareAmt} onChange = {onSellEnter}></TextField>
                 </Stack>
             </Stack>
             <Button id="nextMove" onClick={nextDay}>End Move</Button>
