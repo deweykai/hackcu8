@@ -34,8 +34,8 @@ export function StockPanel() {
     };
 
     const onSell = () => {
+        game.sell(Number(shareAmt));
         console.log(shareAmt);
-        game.sell(1);
         setGame(game);
     };
 
